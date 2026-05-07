@@ -11,7 +11,7 @@ export class SingleLL<T> {
     this.size = 0;
   }
 
-  append(val: T) {
+  append(val: T): this {
     const node = new Node(val);
 
     // init insert
@@ -30,10 +30,11 @@ export class SingleLL<T> {
       this.tail = node;
     }
 
-    return ++this.size;
+    ++this.size;
+    return this;
   }
 
-  prepend(val: T) {
+  prepend(val: T): this {
     const node = new Node(val);
 
     if (this.head === null) {
@@ -44,7 +45,8 @@ export class SingleLL<T> {
       this.head = node;
     }
 
-    return ++this.size;
+    ++this.size;
+    return this;
   }
 
   search(val: T): Node<T> | null {
@@ -61,6 +63,39 @@ export class SingleLL<T> {
     }
 
     return node;
+  }
+
+  delete(val: T): boolean {
+    if (this.head === null) return false;
+
+    if (this.head.val === val) {
+      const node = this.head;
+      this.head = this.head.next;
+      node.next = null;
+      --this.size;
+      return true;
+    }
+
+    let prev = this.head;
+    let current = this.head.next;
+    while (current !== null) {
+      if (current.val === val) {
+        // Updating tail incase deleting last node
+        if (current === this.tail) this.tail = prev;
+
+        prev.next = current.next;
+
+        // disconnect the deleted node from the list
+        current.next = null;
+        --this.size;
+        return true;
+      }
+
+      prev = current;
+      current = current.next;
+    }
+
+    return false;
   }
 }
 
