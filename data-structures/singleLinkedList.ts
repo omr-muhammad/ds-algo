@@ -14,21 +14,34 @@ export class SingleLL<T> {
   append(val: T) {
     const node = new Node(val);
 
-    // first append
+    // init insert
     if (this.head === null) {
       this.head = node;
       this.tail = node;
     }
-    // second append
-    else if (this.head.next === null) {
+    // second insert
+    else if (this.head === this.tail) {
       this.tail = node;
       this.head.next = this.tail;
-      return ++this.size;
     }
-    // normal append
+    // normal insert
     else {
       this.tail!.next = node;
       this.tail = node;
+    }
+
+    return ++this.size;
+  }
+
+  prepend(val: T) {
+    const node = new Node(val);
+
+    if (this.head === null) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.next = this.head;
+      this.head = node;
     }
 
     return ++this.size;
