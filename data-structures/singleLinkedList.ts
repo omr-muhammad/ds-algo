@@ -46,6 +46,22 @@ export class SingleLL<T> {
 
     return ++this.size;
   }
+
+  search(val: T): Node<T> | null {
+    let node: Node<T> | null = null;
+
+    let current: null | Node<T> = this.head;
+    while (current !== null) {
+      if (current.val === val) {
+        node = current;
+        break;
+      }
+
+      current = current.next;
+    }
+
+    return node;
+  }
 }
 
 export function append(val: any) {}
