@@ -61,6 +61,22 @@ export class SingleLL<T> {
     return false;
   }
 
+  getAt(idx: number): T | null {
+    if (this.head === null || idx > this.size) return null;
+
+    // O(1) for last element instead of O(n)
+    if (idx === this.size) return this.tail!.val;
+
+    let n = 0;
+    let current: Node<T> | null = this.head;
+    while (n < idx) {
+      current = current!.next;
+      n++;
+    }
+
+    return current!.val;
+  }
+
   delete(val: T): boolean {
     if (this.head === null) return false;
 
