@@ -77,6 +77,19 @@ export class SingleLL<T> {
     return current!.val;
   }
 
+  indexOf(val: T): number {
+    let idx = 0;
+    let current = this.head;
+    while (current !== null) {
+      if (current.val === val) return idx;
+
+      idx++;
+      current = current.next;
+    }
+
+    return -1;
+  }
+
   delete(val: T): boolean {
     if (this.head === null) return false;
 
