@@ -49,20 +49,16 @@ export class SingleLL<T> {
     return this;
   }
 
-  search(val: T): Node<T> | null {
-    let node: Node<T> | null = null;
+  contains(val: T): boolean {
+    let current = this.head;
 
-    let current: null | Node<T> = this.head;
     while (current !== null) {
-      if (current.val === val) {
-        node = current;
-        break;
-      }
+      if (current.val === val) return true;
 
       current = current.next;
     }
 
-    return node;
+    return false;
   }
 
   delete(val: T): boolean {
@@ -87,6 +83,7 @@ export class SingleLL<T> {
 
         // disconnect the deleted node from the list
         current.next = null;
+
         --this.size;
         return true;
       }
