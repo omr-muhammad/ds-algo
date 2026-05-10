@@ -5,6 +5,19 @@ export class SingleLL<T> {
   private tail: null | Node<T>;
   private size: number;
 
+  private getNode(idx: number) {
+    if (idx >= this.size) return null;
+    if (idx === this.size - 1) return this.tail;
+
+    let current = this.head;
+
+    for (let i = 0; i < idx; ++i) {
+      current = current!.next;
+    }
+
+    return current;
+  }
+
   constructor() {
     this.head = null;
     this.tail = null;
@@ -161,6 +174,14 @@ export class SingleLL<T> {
 
     return arr;
   }
-}
 
-export function append(val: any) {}
+  get length() {
+    return this.size;
+  }
+
+  set length(newLen: number) {
+    const newLastNode = this.getNode(newLen - 1);
+
+    if (newLastNode) newLastNode.next = null;
+  }
+}
