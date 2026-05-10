@@ -11,6 +11,7 @@ export class SingleLL<T> {
     this.size = 0;
   }
 
+  // O(1)
   append(val: T): this {
     const node = new Node(val);
 
@@ -34,6 +35,7 @@ export class SingleLL<T> {
     return this;
   }
 
+  // O(1)
   prepend(val: T): this {
     const node = new Node(val);
 
@@ -49,6 +51,28 @@ export class SingleLL<T> {
     return this;
   }
 
+  // O(n) | Best O(1)
+  insertAt(val: T, idx: number) {
+    if (idx > this.size) return this;
+    else if (idx === 0) return this.prepend(val);
+    else if (idx === this.size) return this.append(val);
+
+    const node = new Node(val);
+    let current = this.head;
+
+    // start with 1 to make current after loop equals list[idx - 1]
+    for (let i = 1; i < idx; i++) {
+      current = current!.next;
+    }
+
+    node.next = current!.next;
+    current!.next = node;
+
+    ++this.size;
+    return this;
+  }
+
+  // O(n) | Best O(1)
   contains(val: T): boolean {
     let current = this.head;
 
@@ -61,6 +85,7 @@ export class SingleLL<T> {
     return false;
   }
 
+  // O(n) | Best O(1)
   getAt(idx: number): T | null {
     if (this.head === null || idx > this.size) return null;
 
@@ -77,6 +102,7 @@ export class SingleLL<T> {
     return current!.val;
   }
 
+  // O(n) | Best O(1)
   indexOf(val: T): number {
     let idx = 0;
     let current = this.head;
@@ -90,6 +116,7 @@ export class SingleLL<T> {
     return -1;
   }
 
+  // O(n) | Best O(1)
   delete(val: T): boolean {
     if (this.head === null) return false;
 
@@ -124,6 +151,7 @@ export class SingleLL<T> {
     return false;
   }
 
+  // O(n)
   toArray(): T[] {
     const arr = [];
 
