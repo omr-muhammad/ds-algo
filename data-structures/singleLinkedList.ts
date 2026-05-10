@@ -175,13 +175,39 @@ export class SingleLL<T> {
     return arr;
   }
 
+  // O(1)
   get length() {
     return this.size;
   }
 
+  // O(n) | Best O(1)
   set length(newLen: number) {
     const newLastNode = this.getNode(newLen - 1);
 
     if (newLastNode) newLastNode.next = null;
+  }
+
+  // O(n)
+  reverse() {
+    let prev = null;
+    let current = this.head;
+
+    while (current !== null) {
+      // Init => [null]  [current] --> [after] --> node
+      // capture after before cutting the link to it
+      const after = current.next;
+
+      // reverse `next` => [null] <-- [current]    [after] --> node
+      current.next = prev;
+
+      // update pointers
+      prev = current;
+      current = after;
+    }
+
+    // swap head & tail
+    const tmp = this.head;
+    this.head = this.tail;
+    this.tail = tmp;
   }
 }
