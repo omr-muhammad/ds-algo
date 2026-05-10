@@ -123,6 +123,18 @@ export class SingleLL<T> {
 
     return false;
   }
+
+  toArray(): T[] {
+    const arr = [];
+
+    let current = this.head;
+    while (current !== null) {
+      arr.push(current.val);
+      current = current.next;
+    }
+
+    return arr;
+  }
 }
 
 export function append(val: any) {}
