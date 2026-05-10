@@ -32,15 +32,15 @@ export class SingleLL<T> {
   prepend(val: T): this {
     const node = new Node(val);
 
-    if (this.head === null) {
-      this.head = node;
+    if (this.tail === null) {
       this.tail = node;
     } else {
       node.next = this.head;
-      this.head = node;
     }
 
+    this.head = node;
     ++this.size;
+
     return this;
   }
 
