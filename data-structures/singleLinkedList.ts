@@ -80,10 +80,10 @@ export class SingleLL<T> {
 
   // O(n) | Best O(1)
   getAt(idx: number): T | null {
-    if (this.head === null || idx > this.size) return null;
+    if (this.head === null || idx >= this.size) return null;
 
     // O(1) for last element instead of O(n)
-    if (idx === this.size) return this.tail!.val;
+    if (idx === this.size - 1) return this.tail!.val;
 
     let n = 0;
     let current: Node<T> | null = this.head;
