@@ -18,20 +18,13 @@ export class SingleLL<T> {
     // init insert
     if (this.head === null) {
       this.head = node;
-      this.tail = node;
-    }
-    // second insert
-    else if (this.head === this.tail) {
-      this.tail = node;
-      this.head.next = this.tail;
-    }
-    // normal insert
-    else {
+    } else {
       this.tail!.next = node;
-      this.tail = node;
     }
 
+    this.tail = node;
     ++this.size;
+
     return this;
   }
 
