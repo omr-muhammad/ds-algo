@@ -97,6 +97,8 @@ export class SingleLL<T> {
 
   // O(n) | Best O(1)
   indexOf(val: T): number {
+    // we can't check `val === tail.val` to catch before tail occurrence
+
     let idx = 0;
     let current = this.head;
     while (current !== null) {
@@ -116,6 +118,9 @@ export class SingleLL<T> {
     if (this.head.val === val) {
       const node = this.head;
       this.head = this.head.next;
+
+      if (this.head === null) this.tail = null; // cover deleting single element
+
       node.next = null;
       --this.size;
       return true;
